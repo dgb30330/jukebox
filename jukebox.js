@@ -1,7 +1,7 @@
 var redirect = "http://localhost/"; 
 // deployment url here - be sure to update allowed redirect urls on spotify developer dashboard
-var id = "your client id";
-var secret = "your client secret";
+var id = "your client id"; // TODO add client id
+var secret = "your client secret"; // TODO add client secret
 
 var playlistData = null;
 var queue = [];
@@ -11,8 +11,8 @@ const NUM_BUTTONS = 50;
 const QUEUE_LIMIT = 25;
 const NO_ACTIVITY_ID = "xxx";
 
-var playlistID = "default playlist id";
-var device_id = "default device id";
+var playlistID = "default playlist id"; // TODO add playlist id
+var device_id = "default device id"; // TODO add device id
 
 AUTHORIZE = "https://accounts.spotify.com/authorize";
 TOKEN = "https://accounts.spotify.com/api/token";
@@ -220,7 +220,6 @@ function parseStatus(){
     var trackHolder = localStorage.getItem("active_track");
     if (this.status == 200){ // ok
         var data = JSON.parse(this.responseText);
-        console.log(data);
         if(data.is_playing == false){
             playTrack(trackHolder);
         }
@@ -259,8 +258,6 @@ function populateButtons(){
     var i;
     var tempID;
     var limit;
-    console.log(NUM_BUTTONS+activeLow);
-    console.log(playlistData.tracks.items.length);
     if(NUM_BUTTONS+activeLow<playlistData.tracks.items.length){
         limit = NUM_BUTTONS;
     }
@@ -268,7 +265,6 @@ function populateButtons(){
         limit = playlistData.tracks.items.length - activeLow;
         for(i=limit;i<NUM_BUTTONS;i++){
             tempID = 't' + i.toString();
-            console.log(tempID);
             document.getElementById(tempID).style.visibility = "hidden";
             tempID = 'i' + i.toString();
             document.getElementById(tempID).style.visibility = "hidden";
@@ -277,7 +273,6 @@ function populateButtons(){
     for(i=0;i<limit;i++){
         tempID = 't' + i.toString();
         renderTag(tempID,playlistData.tracks.items[i+activeLow].track.artists[0].name,playlistData.tracks.items[i+activeLow].track.name);
-        console.log(playlistData.tracks.items[i+activeLow].track.id);
         document.getElementById(tempID).style.visibility = "visible";
         document.getElementById(tempID).value = makeSongObject(playlistData.tracks.items[i+activeLow].track.id,
             playlistData.tracks.items[i+activeLow].track.artists[0].name,playlistData.tracks.items[i+activeLow].track.name);
@@ -427,7 +422,6 @@ function makeSongObject(songID,artist,title){
     if(readoutString.length > 30){
         readoutString = readoutString.substr(0,30) + "...";
     }
-    console.log(readoutString);
     var thisSong = {string: readoutString, id: songID};
     return thisSong;
 }
@@ -459,8 +453,6 @@ function setUpPages(){
 }
 
 function nextPage(){
-    console.log(activeLow+NUM_BUTTONS);
-    console.log(playlistData.tracks.items.length);
     if(activeLow+NUM_BUTTONS<playlistData.tracks.items.length){
         activeLow+=NUM_BUTTONS;
         populateButtons();
