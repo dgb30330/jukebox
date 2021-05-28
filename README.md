@@ -5,4 +5,4 @@ To deploy:
 The javascript file requires five updates as the authorization information is hard-coded.
 
 Screenshot:
-<img src="jukeboxScreen.png" width=500><br>
+<br><img src="jukeboxScreen.png" width=500><br>
